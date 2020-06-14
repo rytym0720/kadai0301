@@ -1,5 +1,5 @@
-'use strict';
 
+'use strict';
 document.addEventListener('DOMContentLoaded', function() {
     // 必要なDOM要素を取得。
           const addTaskTrigger = document.getElementsByClassName('addTask-trigger')[0];
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const addButton = document.createElement('button');
         const removeButton = document.createElement('button');
         addButton.style.margin = "5px"; 
-        removeButton.style.margin ="5px";
+        removeButton.style.margin ="5px"; 
         // それぞれ作業中、削除という言葉をボタンに入れる
         addButton.innerText = '作業中';
         removeButton.innerText = '削除';
@@ -26,17 +26,22 @@ document.addEventListener('DOMContentLoaded', function() {
         tableItem.append(idSpan);
     
         const taskSpan = document.createElement('span');
-        taskSpan.style.minWidth = "70px";  
-        taskSpan.style.display = "inline-block"; 
+        taskSpan.style.width = "60px";  
+        taskSpan.style.display = "inline-block";
+        taskSpan.style.overflow = "hidden"; 
+        taskSpan.style.textOverflow = "ellipsis";
         taskSpan.innerText = task;
-        tableItem.append(taskSpan); 
+        taskSpan.title = task; 
+        tableItem.append(taskSpan);
+        
     
          //入力タスクを表示
          addTaskTarget.appendChild(tableItem);   
         // 作業中ボタンを追加
         tableItem.appendChild(addButton);    
         // 削除ボタンを追加
-        tableItem.appendChild(removeButton);   
+        tableItem.appendChild(removeButton);
+    
     };
     // 追加ボタンに対して、タスク登録イベントを設定
     addTaskTrigger.addEventListener('click', event => {
