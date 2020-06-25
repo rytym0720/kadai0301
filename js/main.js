@@ -5,7 +5,6 @@
     const addTaskValue = document.getElementsByClassName('addTask-value')[0];
     let nextId = 0;
     const todos = [];
-
      //Taskとidを作成
     const addTask = (task, id,tableItem) => {    
     let idSpanTd = document.createElement('td');
@@ -19,8 +18,7 @@
       addTaskTarget.append(tableItem);
       return(task,id)
     };
-    
-     //Button要素を生成する
+    //Button要素を生成する
     const addButton = (tableItem, removeButton, createButton) => {
       let createButtonTd = document.createElement('td');
       let removeButtonTd = document.createElement('td');
@@ -36,8 +34,7 @@
        removeButtonTd.append(removeButton); 
        return(tableItem, removeButton, createButton);
       };
-  
-      //追加ボタンをクリックした際にタスクを追加する処理を行う
+     //追加ボタンをクリックした際にtd要素を追加する処理を行う
      addTaskTrigger.addEventListener('click', () => {
        const task = addTaskValue.value;
        const tableItem = document.createElement('tr');
@@ -46,17 +43,14 @@
        addTask(task, nextId++, tableItem);
        addButton(tableItem, removeButton, createButton);
        addTaskValue.value = '';
-
        removeButton.addEventListener('click', delete_element, false);
   });
-    
     //チェックリスト用オブジェクト
     const todo = {
        task: 'taskSpanTd',
        status: '作業中'
     };
     todos.push(todo);
-    
     // //削除ボタンを押した時にタスクを削除する
     function delete_element () {
       let tabletag = this.closest ('tr');
@@ -64,17 +58,15 @@
       tabletag.remove ();
       updateId();
     }
-
-    //　番号　再振り分け
+    //　連番　再振り分け
     let updateId = () => {
       const tbody = document.getElementsByTagName("tbody")[0];      
       const taskList = tbody.getElementsByTagName('tr');
       nextId = 0;
       Array.from(taskList,tr => {
-          nextId++
-          tr.getElementsByTagName('td')[0].textContent = nextId;
-      });
+        nextId++
+        tr.getElementsByTagName('td')[0].textContent = nextId;
+    });
   }
-  
     });
   }
