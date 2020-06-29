@@ -1,10 +1,10 @@
+  
 {
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', () => {
     const addTaskTrigger = document.getElementsByClassName('addTask-trigger')[0];
     const addTaskTarget = document.getElementsByClassName('addTask-target')[0];
     const addTaskValue = document.getElementsByClassName('addTask-value')[0];
     let nextId = 0;
-    const todos = [];
 
     //Taskとidを作成
     const addTask = (task, id, tableItem) => {
@@ -17,7 +17,7 @@
       tableItem.append(idSpanTd);
       tableItem.append(taskSpanTd);
       addTaskTarget.append(tableItem);
-      return (task, id)
+      return (task, id);
     };
     //Button要素を生成する
     const addButton = (tableItem, removeButton, createButton) => {
@@ -46,31 +46,9 @@
       addTaskValue.value = '';
       removeButton.addEventListener('click', delete_element, false);
 
-      //ボタンを押したら作業中、完了中と変わる
-      createButton.addEventListener('click', () => {
-        if (createButton.textContent === "作業中") {
-          createButton.textContent = "完了";
-        } else {
-          createButton.textContent = "作業中";
-        }
-      });
-    })
-
-
-    //チェックリスト用オブジェクト
-    const todo = {
-      task: 'taskSpanTd',
-      status: '作業中'
-    };
-    todos.push(todo);
-
     // //削除ボタンを押した時にタスクを削除する
     function delete_element() {
-      let tabletag = this.closest('tr');
-      if (tabletag)
-        tabletag.remove();
-      updateId();
-
+      let tableTag = this.closest('tr');if (tableTag)tableTag.remove();updateId();
     }
 
     //　連番　再振り分け
@@ -81,8 +59,8 @@
       Array.from(taskList, tr => {
         tr.getElementsByTagName('td')[0].textContent = nextId;
         nextId++
-
       });
     }
   });
+});
 }
