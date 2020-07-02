@@ -9,8 +9,8 @@
 
     //Taskとidを作成
     const addTask = (task, id, tableItem) => {
-      let idSpanTd = document.createElement('td');
-      let taskSpanTd = document.createElement('td');
+      const idSpanTd = document.createElement('td');
+      const taskSpanTd = document.createElement('td');
       //タスク追加時にtodosにtodoを追加 
       const todo = {
         task: 'taskSpanTd',
@@ -28,8 +28,8 @@
 
     //Button要素を生成する
     const addButton = (tableItem, removeButton, createButton) => {
-      let createButtonTd = document.createElement('td');
-      let removeButtonTd = document.createElement('td');
+      const createButtonTd = document.createElement('td');
+      const removeButtonTd = document.createElement('td');
       //要素内のHTML文章を変更する
       createButton.innerText = '作業中';
       removeButton.innerText = '削除';
@@ -51,16 +51,17 @@
       addTask(task, nextId++, tableItem);
       addButton(tableItem, removeButton, createButton);
       addTaskValue.value = '';
-      removeButton.addEventListener('click', delete_element, false);
+      removeButton.addEventListener('click', deleteElement, false);
 
       // //削除ボタンを押した時にタスクを削除する
-      function delete_element() {
-        let tableTag = this.closest('tr');
-        if (tableTag) tableTag.remove(), updateId();
+      function deleteElement() {
+        const tableTag = this.closest('tr');
+        if (tableTag) tableTag.remove();
+        updateId();
       }
 
       //　連番　再振り分け
-      let updateId = () => {
+      const updateId = () => {
         const tbody = document.getElementsByTagName("tbody")[0];
         const taskList = tbody.getElementsByTagName('tr');
         nextId = 0;
