@@ -51,25 +51,33 @@
       addTask(task, nextId++, tableItem);
       addButton(tableItem, removeButton, createButton);
       addTaskValue.value = '';
-      removeButton.addEventListener('click', deleteElement, false);
-
       // //削除ボタンを押した時にタスクを削除する
-      function deleteElement() {
-        const tableTag = this.closest('tr');
+      const deleteElement = (a) => {
+        const tableTag =a.target.closest('tr');
         if (tableTag) tableTag.remove();
         updateId();
       }
+      removeButton.addEventListener('click', deleteElement, false);
 
-      //　連番　再振り分け
-      const updateId = () => {
-        const tbody = document.getElementsByTagName("tbody")[0];
-        const taskList = tbody.getElementsByTagName('tr');
-        nextId = 0;
-        Array.from(taskList, tr => {
-          tr.getElementsByTagName('td')[0].textContent = nextId;
-          nextId++
-        });
-      }
-    });
+      //ボタンを押したら作業中、完了中と変わる
+      createButton.addEventListener('click', () => {
+        if (createButton.textContent === "作業中") {
+          createButton.textContent = "完了";
+        } else {
+          createButton.textContent = "作業中";
+        }
+      });
+    })
+
+    //　連番　再振り分け
+    const updateId = () => {
+      const tbody = document.getElementsByTagName("tbody")[0];
+      const taskList = tbody.getElementsByTagName('tr');
+      nextId = 0;
+      Array.from(taskList, tr => {
+        tr.getElementsByTagName('td')[0].textContent = nextId;
+        nextId++
+      });
+    }
   });
 }
